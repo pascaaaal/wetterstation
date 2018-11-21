@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
     $key = file_get_contents("keystore.txt");
     echo $key;
     echo hash('sha512', $_GET["key"]);
-    if(hash('sha512', $_GET["key"]) == $key){
+    /*if(hash('sha512', $_GET["key"]) == $key){
         $base = file_get_contents("php://input");
         $wdata = json_decode($base);
         $temp = $wdata["temperature"];
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
         //sendMessage(array("error" => false, "key" => $newkey));
     }else{
         sendError(1, "Invalid Key");
-    }
+    }*/
 }else{
     sendError(0, "Invalid Request");
 }
