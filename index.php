@@ -6,15 +6,19 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
     if(hash('sha512', $_GET["key"]) == str_replace("\r\n", "", $key)){
         $base = file_get_contents("php://input");
         $wdata = json_decode($base);
-        $temp = $wdata["temperature"];
-        $huminity = $wdata["humidity"];
-        $uvindex = $wdata["uvindex"];
-        $air_pressure = $wdata["air_pressure"];
-        $illumiance = $wdata["illumiance"];
+        if($wdata != null){
+            $temp = $wdata["temperature"];
+            $huminity = $wdata["humidity"];
+            $uvindex = $wdata["uvindex"];
+            $air_pressure = $wdata["air_pressure"];
+            $illumiance = $wdata["illumiance"];
 
-        $newkey = generateRandomString(200);
-        file_put_contents("keystore.txt", hash('sha512', $newkey));
-        sendMessage(array("error" => false, "key" => $newkey));
+            $newkey = generateRandomString(200);
+            file_put_contents("keystore.txt", hash('sha512', $newkey));
+            sendMessage(array("error" => false, "key" => $newkey));
+        }else{
+            sendError(2, "Bad json");
+        }
     }else{
         sendError(1, "Invalid Key");
     }
