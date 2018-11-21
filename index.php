@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
                     sendMessage(array("error" => false, "key" => $newkey));
                 }else{
                     sendError(4, "Erorr while saving key");
+                }
             }else{
                 sendError(3, "Incomplete json");
             }
