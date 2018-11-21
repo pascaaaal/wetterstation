@@ -15,8 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
                 $illumiance = $wdata["illumiance"];
 
                 $newkey = generateRandomString(200);
-                file_put_contents("keystore.txt", hash('sha512', $newkey));
-                sendMessage(array("error" => false, "key" => $newkey));
+                if(file_put_contents("keystore.txt", hash('sha512', $newkey))){
+                    sendMessage(array("error" => false, "key" => $newkey));
+                }else{
+                    sendError(4, "Erorr while saving key");
             }else{
                 sendError(3, "Incomplete json");
             }
