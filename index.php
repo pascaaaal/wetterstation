@@ -3,19 +3,18 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
     sendMessage(array("error" => false, "temp" => 1, "humidity" => 1, "uvindex" => 1, "air_pressure" => 1, "illumiance" => 1));
 }elseif ($_SERVER['REQUEST_METHOD'] == "PUT"){
     $key = file_get_contents("keystore.txt");
-    if(hash('sha512', $_GET["key"]) == replace("\r\n", "", $key)){
+    if(hash('sha512', $_GET["key"]) == str_replace("\r\n", "", $key)){
         $base = file_get_contents("php://input");
         $wdata = json_decode($base);
-        //$temp = $wdata["temperature"];
-        //$huminity = $wdata["humidity"];
-        //$uvindex = $wdata["uvindex"];
-        //$air_pressure = $wdata["air_pressure"];
-        //$illumiance = $wdata["illumiance"];
+        $temp = $wdata["temperature"];
+        $huminity = $wdata["humidity"];
+        $uvindex = $wdata["uvindex"];
+        $air_pressure = $wdata["air_pressure"];
+        $illumiance = $wdata["illumiance"];
 
         $newkey = generateRandomString(200);
-        sendMessage(array("d" => $newkey));
-        //file_put_contents("keystore.txt", hash('sha512', $newkey));
-        //sendMessage(array("error" => false, "key" => $newkey));
+        file_put_contents("keystore.txt", hash('sha512', $newkey));
+        sendMessage(array("error" => false, "key" => $newkey));
     }else{
         sendError(1, "Invalid Key");
     }
