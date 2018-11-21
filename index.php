@@ -1,10 +1,10 @@
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] == "GET"){
-    sendMessage(array(["error" => false, "temp" => 1]));
+    sendMessage(array("error" => false, "temp" => 1, "humindity" => 1));
 }elseif ($_SERVER['REQUEST_METHOD'] == "PUT"){
     $key = file_get_contents("keystore.txt");
-    if($_GET["key"] == $key){
+    if(hash('sha512', $_GET["key"]) == $key){
         //Data
         $base = file_get_contents("php://input");
         $wdata = json_decode($base);
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
 
         //Response
         $newkey = generateRandomString(200);
-        file_put_contents("keystore.txt", $newkey);
+        file_put_contents("keystore.txt", hash('sha512', $newkey));
         sendMessage(array(["error" => false, "key" => $newkey]));
     }else{
         sendError(1, "Invalid Key");
