@@ -24,7 +24,7 @@ if ($_SERVER["HTTP_REFERER"] == "GET"){
 }
 
 function sendError($type, $message){
-    sendMessage(array(["error" => true, "type" => $type, "message" => $message]));
+    sendMessage(array("error" => true, "type" => $type, "message" => $message));
 }
 
 function sendMessage($data){
