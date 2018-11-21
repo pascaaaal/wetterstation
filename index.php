@@ -7,15 +7,19 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
         $base = file_get_contents("php://input");
         $wdata = json_decode($base);
         if($wdata != null){
-            $temp = $wdata["temperature"];
-            $huminity = $wdata["humidity"];
-            $uvindex = $wdata["uvindex"];
-            $air_pressure = $wdata["air_pressure"];
-            $illumiance = $wdata["illumiance"];
+            if(isset($wdata["temperature"]) && isset($wdata["humidity"]) && isset($wdata["uvindex"]) && isset($wdata["air_pressure"]) && isset($wdata["illumiance"])){
+                $temp = $wdata["temperature"];
+                $huminity = $wdata["humidity"];
+                $uvindex = $wdata["uvindex"];
+                $air_pressure = $wdata["air_pressure"];
+                $illumiance = $wdata["illumiance"];
 
-            $newkey = generateRandomString(200);
-            file_put_contents("keystore.txt", hash('sha512', $newkey));
-            sendMessage(array("error" => false, "key" => $newkey));
+                $newkey = generateRandomString(200);
+                file_put_contents("keystore.txt", hash('sha512', $newkey));
+                sendMessage(array("error" => false, "key" => $newkey));
+            }else{
+                sendError(3, "Incomplete json");
+            }
         }else{
             sendError(2, "Bad json");
         }
