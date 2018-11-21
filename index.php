@@ -1,7 +1,7 @@
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] == "GET"){
-    sendMessage(array("error" => false, "temp" => 1, "humindity" => 1));
+    sendMessage(array("error" => false, "temp" => 1, "humidity" => 1, "uvindex" => 1));
 }elseif ($_SERVER['REQUEST_METHOD'] == "PUT"){
     $key = file_get_contents("keystore.txt");
     if(hash('sha512', $_GET["key"]) == $key){
@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
         $base = file_get_contents("php://input");
         $wdata = json_decode($base);
         $temp = $wdata["temperature"];
-        $huminity = $wdata["huminity"];
+        $huminity = $wdata["humidity"];
         $uvindex = $wdata["uvindex"];
 
         //Response
