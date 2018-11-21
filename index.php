@@ -13,8 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
         //$illumiance = $wdata["illumiance"];
 
         $newkey = generateRandomString(200);
-        file_put_contents("keystore.txt", hash('sha512', $newkey));
-        sendMessage(array("error" => false, "key" => $newkey));
+        sendMessage(array("d" => $newkey));
+        //file_put_contents("keystore.txt", hash('sha512', $newkey));
+        //sendMessage(array("error" => false, "key" => $newkey));
     }else{
         sendError(1, "Invalid Key");
     }
