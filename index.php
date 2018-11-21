@@ -1,8 +1,8 @@
 <?php
 
-if ($_SERVER["HTTP_REFERER"] == "GET"){
+if ($_SERVER['REQUEST_METHOD'] == "GET"){
     sendMessage(array(["error" => false, "temp" => 1]));
-}elseif ($_SERVER["HTTP_REFERER"] == "PUT"){
+}elseif ($_SERVER['REQUEST_METHOD'] == "PUT"){
     $key = file_get_contents("keystore.txt");
     if($_GET["key"] == $key){
         //Data
