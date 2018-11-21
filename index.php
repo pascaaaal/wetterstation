@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
         file_put_contents("keystore.txt", hash('sha512', $newkey));
         sendMessage(array("error" => false, "key" => $newkey));
     }else{
-        sendError(1, "Invalid Key");
+        sendError(1, "Invalid Key " . $key . ":" . hash('sha512', $_GET["key"]));
     }
 }else{
     sendError(0, "Invalid Request");
