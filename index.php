@@ -3,9 +3,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
     sendMessage(array("error" => false, "temp" => 1, "humidity" => 1, "uvindex" => 1, "air_pressure" => 1, "illumiance" => 1));
 }elseif ($_SERVER['REQUEST_METHOD'] == "PUT"){
     $key = file_get_contents("keystore.txt");
-    echo $key;
-    echo hash('sha512', $_GET["key"]);
-    /*if(hash('sha512', $_GET["key"]) == $key){
+    if(hash('sha512', $_GET["key"]) == $key){
         $base = file_get_contents("php://input");
         $wdata = json_decode($base);
         $temp = $wdata["temperature"];
@@ -16,10 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
 
         $newkey = generateRandomString(200);
         file_put_contents("keystore.txt", hash('sha512', $newkey));
-        //sendMessage(array("error" => false, "key" => $newkey));
+        sendMessage(array("error" => false, "key" => $newkey));
     }else{
         sendError(1, "Invalid Key");
-    }*/
+    }
 }else{
     sendError(0, "Invalid Request");
 }
