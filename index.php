@@ -15,6 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
                 $air_pressure = $wdata["air_pressure"];
                 $illumiance = $wdata["illumiance"];
 
+                sendMessage(array("d" => true));
+                return;
+            
                 $newkey = generateRandomString(200);
                 if(file_put_contents("keystore.txt", hash('sha512', $newkey))){
                     sendMessage(array("error" => false, "key" => $newkey));
@@ -42,6 +45,5 @@ function sendMessage($data){
 }
 function generateRandomString($length){
     $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    sendMessage(array("d" => $chars));
     return substr(str_shuffle($chars), 0, $length);
 }
