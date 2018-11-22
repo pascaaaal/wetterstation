@@ -9,9 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
         $wdata = json_decode($base);
         if($wdata != null){
             //if(isset($wdata["temperature"]) && isset($wdata["humidity"]) && isset($wdata["uvindex"]) && isset($wdata["air_pressure"]) && isset($wdata["illumiance"])){
-                $temp = $wdata["temperature"];
                 sendMessage(array("d" => true));
                 return;
+                $temp = $wdata["temperature"];
                 $huminity = $wdata["humidity"];
                 $uvindex = $wdata["uvindex"];
                 $air_pressure = $wdata["air_pressure"];
