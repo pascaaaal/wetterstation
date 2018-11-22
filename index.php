@@ -1,8 +1,6 @@
 <?php
 set_time_limit(100);
-if ($_SERVER['REQUEST_METHOD'] == "GET"){
-    sendMessage(array("error" => false, "temp" => 1, "humidity" => 1, "uvindex" => 1, "air_pressure" => 1, "illumiance" => 1));
-}elseif ($_SERVER['REQUEST_METHOD'] == "PUT"){
+if ($_SERVER['REQUEST_METHOD'] == "PUT"){
     $key = file_get_contents("keystore.txt");
     if(hash('sha512', $_GET["key"]) == str_replace("\r\n", "", $key)){
         $base = file_get_contents("php://input");
@@ -16,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
                 $illumiance = $wdata->illumiance;
             
                 $newkey = generateRandomString(200);
-                if(file_put_contents("keystore.txt", hash('sha512', $newkey))){
+                if(file_put_contents("keystore.txt", hash('sha512', $newkey)) && file_put_contents("data.txt", json_encode(array("error" => false, "temp" => 1, "humidity" => 1, "uvindex" => 1, "air_pressure" => 1, "illumiance" => 1)))){
                     sendMessage(array("error" => false, "key" => $newkey));
                 }else{
                     sendError(4, "Erorr while saving key");
