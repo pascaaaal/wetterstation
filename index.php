@@ -16,6 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
                 $illumiance = $wdata["illumiance"];
 
                 $newkey = generateRandomString(200);
+		sendMessage(array("d" => $newkey));
+		return;
                 if(file_put_contents("keystore.txt", hash('sha512', $newkey))){
                     sendMessage(array("error" => false, "key" => $newkey));
                 }else{
@@ -41,13 +43,6 @@ function sendMessage($data){
     echo json_encode($data);
 }
 function generateRandomString($length){
-    $str = "";
-	$characters = array_merge(range('A','Z'), range('a','z'), range('0','9'));
-	$max = count($characters) - 1;
-	for ($i = 0; $i < $length; $i++) {
-		$rand = mt_rand(0, $max);
-		$str .= $characters[$rand];
-	}
-	sendMessage(array("d" => $str));
-	return $str;
+    $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    return substr(str_shuffle($chars), 0, $length);
 }
