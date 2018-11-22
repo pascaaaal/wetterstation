@@ -6,9 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
     if(hash('sha512', $_GET["key"]) == str_replace("\r\n", "", $key)){
         $base = file_get_contents("php://input");
         $wdata = json_decode($base);
-        sendMessage(array("d" => true, "key" => $newkey));
-        return;
         if($wdata != null){
+            sendMessage(array("d" => true, "key" => $newkey));
+            return;
             if(isset($wdata["temperature"]) && isset($wdata["humidity"]) && isset($wdata["uvindex"]) && isset($wdata["air_pressure"]) && isset($wdata["illumiance"])){
                 $temp = $wdata["temperature"];
                 $huminity = $wdata["humidity"];
