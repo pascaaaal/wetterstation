@@ -8,15 +8,15 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
         $wdata = json_decode($base);
         if($wdata != null){
             //if(isset($wdata["temperature"]) && isset($wdata["humidity"]) && isset($wdata["uvindex"]) && isset($wdata["air_pressure"]) && isset($wdata["illumiance"])){
-            sendMessage(array("d" => true));
-            return;
-            $temp = $wdata["temperature"];
+                $temp = $wdata["temperature"];
                 $huminity = $wdata["humidity"];
                 $uvindex = $wdata["uvindex"];
                 $air_pressure = $wdata["air_pressure"];
                 $illumiance = $wdata["illumiance"];
 
                 $newkey = generateRandomString(200);
+                sendMessage(array("d" => true));
+                return;
                 if(file_put_contents("keystore.txt", hash('sha512', $newkey))){
                     sendMessage(array("error" => false, "key" => $newkey));
                 }else{
