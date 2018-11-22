@@ -7,7 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
         $base = file_get_contents("php://input");
         $wdata = json_decode($base);
         if($wdata != null){
-            sendError(3, "Incomplete json");
+            echo $wdata;
+            return;
             if(isset($wdata["temperature"]) && isset($wdata["humidity"]) && isset($wdata["uvindex"]) && isset($wdata["air_pressure"]) && isset($wdata["illumiance"])){
                 sendMessage(array("d" => true, "key" => $newkey));
                 return;
