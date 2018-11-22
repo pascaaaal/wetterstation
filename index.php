@@ -10,13 +10,12 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
         if($wdata != null){
             //if(isset($wdata["temperature"]) && isset($wdata["humidity"]) && isset($wdata["uvindex"]) && isset($wdata["air_pressure"]) && isset($wdata["illumiance"])){
                 $temp = $wdata["temperature"];
+                sendMessage(array("d" => true));
+                return;
                 $huminity = $wdata["humidity"];
                 $uvindex = $wdata["uvindex"];
                 $air_pressure = $wdata["air_pressure"];
                 $illumiance = $wdata["illumiance"];
-
-                sendMessage(array("d" => true));
-                return;
             
                 $newkey = generateRandomString(200);
                 if(file_put_contents("keystore.txt", hash('sha512', $newkey))){
