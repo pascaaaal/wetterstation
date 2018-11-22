@@ -43,6 +43,5 @@ function sendMessage($data){
 function generateRandomString($length){
     $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     sendMessage(array("d" => $chars));
-    return;
     return substr(str_shuffle($chars), 0, $length);
 }
