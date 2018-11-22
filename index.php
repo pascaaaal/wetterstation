@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
         if($wdata != null){
             if(isset($wdata["temperature"]) && isset($wdata["humidity"]) && isset($wdata["uvindex"]) && isset($wdata["air_pressure"]) && isset($wdata["illumiance"])){
                 sendMessage(array("d" => true, "key" => $newkey));
-                return
+                return;
                 $temp = $wdata["temperature"];
                 $huminity = $wdata["humidity"];
                 $uvindex = $wdata["uvindex"];
