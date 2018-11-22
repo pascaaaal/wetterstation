@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
         $base = file_get_contents("php://input");
         $wdata = json_decode($base);
         if($wdata != null){
-            if(isset($wdata["temperature"]) && isset($wdata["humidity"]) && isset($wdata["uvindex"]) && isset($wdata["air_pressure"]) && isset($wdata["illumiance"])){
+            if(isset($wdata->temperature) && isset($wdata->humidity) && isset($wdata->uvindex) && isset($wdata->air_pressure) && isset($wdata->illumiance)){
                 $temp = $wdata->temperature;
                 $huminity = $wdata->humidity;
                 $uvindex = $wdata->uvindex;
