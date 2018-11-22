@@ -16,16 +16,14 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
                 $illumiance = $wdata["illumiance"];
 
                 $newkey = generateRandomString(200);
-		sendMessage(array("d" => $newkey));
-		return;
                 if(file_put_contents("keystore.txt", hash('sha512', $newkey))){
                     sendMessage(array("error" => false, "key" => $newkey));
                 }else{
                     sendError(4, "Erorr while saving key");
                 }
-            //}else{
-            //    sendError(3, "Incomplete json");
-            //}
+          //}else{
+          //    sendError(3, "Incomplete json");
+          //}
         }else{
             sendError(2, "Bad json");
         }
@@ -44,5 +42,7 @@ function sendMessage($data){
 }
 function generateRandomString($length){
     $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    sendMessage(array("d" => $chars));
+    return;
     return substr(str_shuffle($chars), 0, $length);
 }
