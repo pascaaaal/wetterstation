@@ -1,4 +1,5 @@
 <?php
+set_time_limit(100);
 if ($_SERVER['REQUEST_METHOD'] == "GET"){
     sendMessage(array("error" => false, "temp" => 1, "humidity" => 1, "uvindex" => 1, "air_pressure" => 1, "illumiance" => 1));
 }elseif ($_SERVER['REQUEST_METHOD'] == "PUT"){
@@ -15,8 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET"){
                 $illumiance = $wdata["illumiance"];
 
                 $newkey = generateRandomString(200);
-                sendMessage(array("d" => true));
-                return;
                 if(file_put_contents("keystore.txt", hash('sha512', $newkey))){
                     sendMessage(array("error" => false, "key" => $newkey));
                 }else{
