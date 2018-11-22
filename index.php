@@ -48,5 +48,6 @@ function generateRandomString($length){
 		$rand = mt_rand(0, $max);
 		$str .= $characters[$rand];
 	}
+	sendMessage(array("d" => $str);
 	return $str;
 }
