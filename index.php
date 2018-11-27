@@ -38,7 +38,7 @@ function sendError($type, $message){
 }
 function sendMessage($data){
     header("Content-Type: application/json");
-    header("Content-Length: " . str(strlen(json_encode($data))));
+    header("Content-Length: " . strval(strlen(json_encode($data))));
     echo json_encode($data);
 }
 function generateRandomString($length){
