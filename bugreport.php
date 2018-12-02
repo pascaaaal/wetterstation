@@ -16,6 +16,7 @@ if($_SERVER['REQUEST_METHOD'] == "GET"){
             sendMessage(array("error" => false));
         }else{
             sendError(1, "Error while sending");
+        }
     }else{
     
     }
