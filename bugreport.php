@@ -12,8 +12,10 @@ if($_SERVER['REQUEST_METHOD'] == "GET"){
     
     if($device == "mobile"){
         $mmessage = "Bugreport from Mobile App:\r\n" . $message;
-        mail("pascal.faude@gmail.com", "Weatherstation Bugreport!", $mmessage);
-        sendMessage(array("error" => false));
+        if(mail("pascal.faude@gmail.com", "Weatherstation Bugreport!", $mmessage)){
+            sendMessage(array("error" => false));
+        }else{
+            sendError(1, "Error while sending");
     }else{
     
     }
