@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD'] == "GET"){
     }else{
     
     }
-    
+    sendMessage(array("error" => false));
 }else{
     sendError(0, "Invalid Request");
 }
