@@ -6,7 +6,7 @@ if($_SERVER['REQUEST_METHOD'] == "GET"){
     $key = file_get_contents("keystore.txt");
     if(hash('sha512', $_GET["key"]) == str_replace("\r\n", "", $key)){
         $base = file_get_contents("php://input");
-        $base = str_replace("\", "", $base);
+        $base = str_replace(""\", """, $base);
         $wdata = json_decode($base);
         if($wdata != null){
             if(isset($wdata->temperature) && isset($wdata->humidity) && isset($wdata->uvindex) && isset($wdata->air_pressure) && isset($wdata->illumiance)){
