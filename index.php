@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == "GET"){
                 sendError(3, "Incomplete json");
             }
         }else{
-            sendError(2, "Bad json");
+            sendError(2, "Bad json " . $base);
         }
     }else{
         sendError(1, "Invalid Key");
