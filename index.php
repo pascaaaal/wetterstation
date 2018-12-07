@@ -3,8 +3,7 @@ set_time_limit(100);
 if($_SERVER['REQUEST_METHOD'] == "GET"){
     sendMessage(json_decode(file_get_contents("data.txt")));
 }elseif ($_SERVER['REQUEST_METHOD'] == "PUT"){
-    $key = file_get_contents("keystore.txt");
-    if(hash('sha512', $_GET["key"]) == str_replace("\r\n", "", $key)){
+    if(hash('sha512', $_GET["key"]) == "a420f1fe3884e5ce3e133b8f3e0a748e9ec7f0b5f14b4aca0d75989610909ecb9b28e997a7ec6b851bdbc1bad46da1464a0203eb8d039af74c6cada5b67d78ce"){
         $base = file_get_contents("php://input");
         $wdata = json_decode($base);
         if($wdata != null){
@@ -14,12 +13,11 @@ if($_SERVER['REQUEST_METHOD'] == "GET"){
                 $uvindex = $wdata->uvindex;
                 $air_pressure = $wdata->air_pressure;
                 $illumiance = $wdata->illumiance;
-            
-                $newkey = generateRandomString(100);
-                if(file_put_contents("keystore.txt", hash('sha512', $newkey)) && file_put_contents("data.txt", json_encode(array("error" => false, "temp" => $temp, "humidity" => $huminity, "uvindex" => $uvindex, "air_pressure" => $air_pressure, "illumiance" => $illumiance)))){
-                    sendMessage(array("error" => false, "key" => $newkey));
+                
+                if(file_put_contents("data.txt", json_encode(array("error" => false, "temp" => $temp, "humidity" => $huminity, "uvindex" => $uvindex, "air_pressure" => $air_pressure, "illumiance" => $illumiance)))){
+                    sendMessage(array("error" => false));
                 }else{
-                    sendError(4, "Erorr while saving key");
+                    sendError(4, "Erorr while saving data");
                 }
             }else{
                 sendError(3, "Incomplete json");
