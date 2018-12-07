@@ -15,7 +15,7 @@ if($_SERVER['REQUEST_METHOD'] == "GET"){
                 $air_pressure = $wdata->air_pressure;
                 $illumiance = $wdata->illumiance;
             
-                $newkey = generateRandomString(200);
+                $newkey = generateRandomString(100);
                 if(file_put_contents("keystore.txt", hash('sha512', $newkey)) && file_put_contents("data.txt", json_encode(array("error" => false, "temp" => $temp, "humidity" => $huminity, "uvindex" => $uvindex, "air_pressure" => $air_pressure, "illumiance" => $illumiance)))){
                     sendMessage(array("error" => false, "key" => $newkey));
                 }else{
