@@ -1,1 +1,0 @@
-{"error":false,"temp":1,"humidity":1,"uvindex":1,"air_pressure":1,"illumiance":1}
