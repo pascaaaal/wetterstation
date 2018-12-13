@@ -3,7 +3,7 @@ set_time_limit(100);
 if($_SERVER['REQUEST_METHOD'] == "GET"){
     sendMessage(json_decode(file_get_contents("data.txt")));
 }elseif ($_SERVER['REQUEST_METHOD'] == "PUT"){
-    if(hash('sha512', $_GET["key"]) == "a420f1fe3884e5ce3e133b8f3e0a748e9ec7f0b5f14b4aca0d75989610909ecb9b28e997a7ec6b851bdbc1bad46da1464a0203eb8d039af74c6cada5b67d78ce"){
+    if(hash('sha512', $_GET["key"]) == <Key>){
         $base = file_get_contents("php://input");
         $wdata = json_decode($base);
         if($wdata != null){
